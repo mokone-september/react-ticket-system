@@ -1,34 +1,58 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import { useSelector } from 'react-redux'
+// import CalendarView from './components/CalendarView'
+// import TimeSlotScheduler from './components/TimeSlotScheduler'
+// import TicketList from './components/TicketList'
+import TicketForm from './components/TicketForm'
+// import FilterTickets from './components/FilterTickets'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [showForm, setShowForm] = useState(false)
+  // const { view } = useSelector(state => state.tickets)
 
+  // Only TicketForm should work, rest are commented out
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="App">
+      <header className="App-header">
+        <div className="header-content">
+          <h1>⏰ Ticket Scheduling System</h1>
+          <p>Schedule and manage your tickets efficiently</p>
+        </div>
+        <button 
+          className="btn-primary create-ticket-btn"
+          onClick={() => setShowForm(true)}
+        >
+          + Schedule New Ticket
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      </header>
+
+      <main className="App-main">
+        {/* <FilterTickets /> */}
+        
+        {showForm && (
+          <div className="modal-overlay">
+            <div className="modal">
+              <div className="modal-header">
+                <h2>Schedule New Ticket</h2>
+                <button 
+                  className="close-btn"
+                  onClick={() => setShowForm(false)}
+                >
+                  ×
+                </button>
+              </div>
+              <TicketForm onClose={() => setShowForm(false)} />
+            </div>
+          </div>
+        )}
+
+        <div className="content-area">
+          {/* <CalendarView /> */}
+          {/* <TimeSlotScheduler /> */}
+        </div>
+      </main>
+    </div>
   )
 }
 
